@@ -23,7 +23,7 @@
     "@vgururaj/auth": "workspace:*",
     "@vgururaj/http": "workspace:*",
     "@vgururaj/ui": "workspace:*",
-    "i18next": "^24.2.3",
+    "i18next": "^26.4.2",
     "lucide-react": "^0.484.0",
     "motion": "^12.5.0",
     "react": "^19.0.0",
