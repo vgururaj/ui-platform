@@ -68,7 +68,7 @@
     "storybook": "^8.6.9",
     "tailwindcss": "^4.0.14",
     "tsup": "^8.4.0",
-    "typescript": "^5.8.2",
+    "typescript": "^7.0.2",
     "vite": "^6.2.2",
     "vitest": "^3.0.9"
   }
