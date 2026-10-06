@@ -1,0 +1,12 @@
+pnpm-lock.yaml
+pnpm-store
+.pnpm-store
+node_modules
+dist
+coverage
+storybook-static
+playwright-report
+test-results
+.turbo
+apps/demo/public/mockServiceWorker.js
+CHANGELOG.md

@@ -1,0 +1,11 @@
+# Light-touch ownership: escape hatches + shared platform controls only.
+# Replace @vgururaj with your GitHub user or org/team after the remote exists.
+# “Require review from Code Owners” should stay off until a real team is configured.
+
+/security/ @vgururaj
+/.github/ @vgururaj
+/Dockerfile @vgururaj
+/deploy/ @vgururaj
+/docker-compose.yml @vgururaj
+/packages/eslint-config/ @vgururaj
+/docs/ENG_STANDARDS.md @vgururaj

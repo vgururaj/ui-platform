@@ -1,0 +1,22 @@
+# Gitleaks config for ui-platform.
+# Add allowlist entries only for intentional fixtures that look like secrets.
+
+title = "ui-platform"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Dependencies, build artifacts, and documented false positives"
+paths = [
+  '''(^|/)node_modules/''',
+  '''(^|/)\.pnpm-store/''',
+  '''(^|/)\.cache/''',
+  '''(^|/)dist/''',
+  '''(^|/)coverage/''',
+  '''(^|/)storybook-static/''',
+  '''(^|/)playwright-report/''',
+  '''(^|/)test-results/''',
+  '''security/audit-allowlist\.json''',
+  '''apps/demo/public/mockServiceWorker\.js''',
+]

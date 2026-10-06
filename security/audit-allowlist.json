@@ -1,0 +1,12 @@
+{
+  "$schema_comment": "High/critical pnpm audit exceptions only. Each entry needs id, package, reason, owner, expires (YYYY-MM-DD).",
+  "exceptions": [
+    {
+      "id": "1240992",
+      "package": "braces",
+      "reason": "No patched release on npm (advisory patched versions <0.0.0). Dev-only via lint-staged→micromatch; not in production bundle. Revisit when micromatch/braces ship a fix.",
+      "owner": "@vgururaj",
+      "expires": "2026-12-31"
+    }
+  ]
+}

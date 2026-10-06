@@ -1,0 +1,30 @@
+{
+  "nav": {
+    "home": "Home",
+    "items": "Items",
+    "forms": "Forms",
+    "uploads": "Uploads",
+    "tabs": "Tabs",
+    "access": "Access",
+    "admin": "Admin",
+    "errors": "Errors",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "login": {
+    "title": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "google": "Continue with Google",
+    "help": "Seed users: admin@demo.local / user@demo.local / viewer@demo.local — password: password",
+    "googleHint": "Presentational only — swap AuthAdapter for real OIDC later."
+  },
+  "common": {
+    "theme": "Theme",
+    "locale": "Language",
+    "search": "Search",
+    "loading": "Loading…"
+  }
+}

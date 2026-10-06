@@ -1,0 +1,13 @@
+{
+  "extends": "@vgururaj/tsconfig/vite-app.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "@vgururaj/ui": ["../../packages/ui/src/index.ts"],
+      "@vgururaj/auth": ["../../packages/auth/src/index.ts"],
+      "@vgururaj/http": ["../../packages/http/src/index.ts"]
+    },
+    "types": ["vite/client"]
+  },
+  "include": ["src"]
+}

@@ -1,0 +1,194 @@
+[
+  {
+    "id": "item-01",
+    "name": "Item 01",
+    "description": "Demo fixture item number 1",
+    "status": "draft",
+    "category": "beta",
+    "updatedAt": "2026-01-02T12:00:00.000Z"
+  },
+  {
+    "id": "item-02",
+    "name": "Item 02",
+    "description": "Demo fixture item number 2",
+    "status": "archived",
+    "category": "gamma",
+    "updatedAt": "2026-01-03T12:00:00.000Z"
+  },
+  {
+    "id": "item-03",
+    "name": "Item 03",
+    "description": "Demo fixture item number 3",
+    "status": "active",
+    "category": "delta",
+    "updatedAt": "2026-01-04T12:00:00.000Z"
+  },
+  {
+    "id": "item-04",
+    "name": "Item 04",
+    "description": "Demo fixture item number 4",
+    "status": "draft",
+    "category": "alpha",
+    "updatedAt": "2026-01-05T12:00:00.000Z"
+  },
+  {
+    "id": "item-05",
+    "name": "Item 05",
+    "description": "Demo fixture item number 5",
+    "status": "archived",
+    "category": "beta",
+    "updatedAt": "2026-01-06T12:00:00.000Z"
+  },
+  {
+    "id": "item-06",
+    "name": "Item 06",
+    "description": "Demo fixture item number 6",
+    "status": "active",
+    "category": "gamma",
+    "updatedAt": "2026-01-07T12:00:00.000Z"
+  },
+  {
+    "id": "item-07",
+    "name": "Item 07",
+    "description": "Demo fixture item number 7",
+    "status": "draft",
+    "category": "delta",
+    "updatedAt": "2026-01-08T12:00:00.000Z"
+  },
+  {
+    "id": "item-08",
+    "name": "Item 08",
+    "description": "Demo fixture item number 8",
+    "status": "archived",
+    "category": "alpha",
+    "updatedAt": "2026-01-09T12:00:00.000Z"
+  },
+  {
+    "id": "item-09",
+    "name": "Item 09",
+    "description": "Demo fixture item number 9",
+    "status": "active",
+    "category": "beta",
+    "updatedAt": "2026-01-10T12:00:00.000Z"
+  },
+  {
+    "id": "item-10",
+    "name": "Item 10",
+    "description": "Demo fixture item number 10",
+    "status": "draft",
+    "category": "gamma",
+    "updatedAt": "2026-01-11T12:00:00.000Z"
+  },
+  {
+    "id": "item-11",
+    "name": "Item 11",
+    "description": "Demo fixture item number 11",
+    "status": "archived",
+    "category": "delta",
+    "updatedAt": "2026-01-12T12:00:00.000Z"
+  },
+  {
+    "id": "item-12",
+    "name": "Item 12",
+    "description": "Demo fixture item number 12",
+    "status": "active",
+    "category": "alpha",
+    "updatedAt": "2026-01-13T12:00:00.000Z"
+  },
+  {
+    "id": "item-13",
+    "name": "Item 13",
+    "description": "Demo fixture item number 13",
+    "status": "draft",
+    "category": "beta",
+    "updatedAt": "2026-01-14T12:00:00.000Z"
+  },
+  {
+    "id": "item-14",
+    "name": "Item 14",
+    "description": "Demo fixture item number 14",
+    "status": "archived",
+    "category": "gamma",
+    "updatedAt": "2026-01-15T12:00:00.000Z"
+  },
+  {
+    "id": "item-15",
+    "name": "Item 15",
+    "description": "Demo fixture item number 15",
+    "status": "active",
+    "category": "delta",
+    "updatedAt": "2026-01-16T12:00:00.000Z"
+  },
+  {
+    "id": "item-16",
+    "name": "Item 16",
+    "description": "Demo fixture item number 16",
+    "status": "draft",
+    "category": "alpha",
+    "updatedAt": "2026-01-17T12:00:00.000Z"
+  },
+  {
+    "id": "item-17",
+    "name": "Item 17",
+    "description": "Demo fixture item number 17",
+    "status": "archived",
+    "category": "beta",
+    "updatedAt": "2026-01-18T12:00:00.000Z"
+  },
+  {
+    "id": "item-18",
+    "name": "Item 18",
+    "description": "Demo fixture item number 18",
+    "status": "active",
+    "category": "gamma",
+    "updatedAt": "2026-01-19T12:00:00.000Z"
+  },
+  {
+    "id": "item-19",
+    "name": "Item 19",
+    "description": "Demo fixture item number 19",
+    "status": "draft",
+    "category": "delta",
+    "updatedAt": "2026-01-20T12:00:00.000Z"
+  },
+  {
+    "id": "item-20",
+    "name": "Item 20",
+    "description": "Demo fixture item number 20",
+    "status": "archived",
+    "category": "alpha",
+    "updatedAt": "2026-01-21T12:00:00.000Z"
+  },
+  {
+    "id": "item-21",
+    "name": "Item 21",
+    "description": "Demo fixture item number 21",
+    "status": "active",
+    "category": "beta",
+    "updatedAt": "2026-01-22T12:00:00.000Z"
+  },
+  {
+    "id": "item-22",
+    "name": "Item 22",
+    "description": "Demo fixture item number 22",
+    "status": "draft",
+    "category": "gamma",
+    "updatedAt": "2026-01-23T12:00:00.000Z"
+  },
+  {
+    "id": "item-23",
+    "name": "Item 23",
+    "description": "Demo fixture item number 23",
+    "status": "archived",
+    "category": "delta",
+    "updatedAt": "2026-01-24T12:00:00.000Z"
+  },
+  {
+    "id": "item-24",
+    "name": "Item 24",
+    "description": "Demo fixture item number 24",
+    "status": "active",
+    "category": "alpha",
+    "updatedAt": "2026-01-25T12:00:00.000Z"
+  }
+]

@@ -1,0 +1,5 @@
+# Strip Cursor attribution trailers if tooling injects them.
+MSG_FILE="$1"
+if [ -f "$MSG_FILE" ]; then
+  grep -viE '^(Co-authored-by: Cursor|Made-with: Cursor)' "$MSG_FILE" > "$MSG_FILE.tmp" && mv "$MSG_FILE.tmp" "$MSG_FILE"
+fi

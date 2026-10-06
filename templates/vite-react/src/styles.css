@@ -1,0 +1,14 @@
+@import '@vgururaj/ui/styles.css';
+
+/* Ensure Tailwind scans workspace packages (AppShell, Radix wrappers, etc.) */
+@source "../../../packages/ui/src/**/*.{ts,tsx}";
+@source "../../../packages/auth/src/**/*.{ts,tsx}";
+@source "./**/*.{ts,tsx}";
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}

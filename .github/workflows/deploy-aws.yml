@@ -1,0 +1,122 @@
+# Deploy SPA to AWS S3 + CloudFront (manual or after AWS is wired).
+#
+# Required GitHub configuration (per environment: dev / staging / production only):
+#   Secrets / vars:
+#     AWS_ROLE_ARN          — IAM role for OIDC (preferred over access keys)
+#     AWS_REGION            — e.g. us-east-1
+#     AWS_SSM_PATH          — must end with /dev, /staging, or /production (matches environment name)
+#     S3_BUCKET             — destination bucket name
+#     CLOUDFRONT_DISTRIBUTION_ID — for cache invalidation
+#
+# IAM role needs: ssm:GetParametersByPath, s3:PutObject/DeleteObject/ListBucket,
+#                 cloudfront:CreateInvalidation
+# Trust: GitHub OIDC provider for this repo.
+
+name: Deploy AWS (S3 + CloudFront)
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target environment
+        required: true
+        type: choice
+        options:
+          - dev
+          - staging
+          - production
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Validate deploy variables
+        env:
+          AWS_SSM_PATH: ${{ vars.AWS_SSM_PATH }}
+          EXPECTED_ENV: ${{ inputs.environment }}
+          S3_BUCKET: ${{ vars.S3_BUCKET }}
+          CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+          AWS_REGION: ${{ vars.AWS_REGION }}
+          AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+        run: |
+          missing=0
+          for name in AWS_ROLE_ARN AWS_REGION AWS_SSM_PATH S3_BUCKET CLOUDFRONT_DISTRIBUTION_ID; do
+            eval "val=\${$name}"
+            if [ -z "${val}" ]; then
+              echo "Missing required var/secret: ${name}"
+              missing=1
+            fi
+          done
+          if [ "${missing}" -ne 0 ]; then
+            exit 1
+          fi
+          case "${AWS_SSM_PATH}" in
+            */"${EXPECTED_ENV}"|*/"${EXPECTED_ENV}"/) ;;
+            *)
+              echo "AWS_SSM_PATH='${AWS_SSM_PATH}' must end with '/${EXPECTED_ENV}'"
+              echo "Canonical env names: dev | staging | production (not stg, stage, prod, …)"
+              exit 1
+              ;;
+          esac
+
+      - name: Generate runtime config from SSM
+        env:
+          AWS_SSM_PATH: ${{ vars.AWS_SSM_PATH }}
+          CONFIG_OUT: apps/demo/public/config.js
+        run: pnpm config:generate
+
+      - name: Build demo
+        run: pnpm --filter @vgururaj/demo... build
+
+      - name: Sync to S3
+        env:
+          S3_BUCKET: ${{ vars.S3_BUCKET }}
+        run: |
+          if [ -z "${S3_BUCKET}" ]; then
+            echo "S3_BUCKET is empty"
+            exit 1
+          fi
+          aws s3 sync apps/demo/dist "s3://${S3_BUCKET}/" --delete \
+            --cache-control "public,max-age=31536000,immutable" \
+            --exclude "index.html" \
+            --exclude "config.js"
+          aws s3 cp apps/demo/dist/index.html "s3://${S3_BUCKET}/index.html" \
+            --cache-control "no-cache"
+          aws s3 cp apps/demo/dist/config.js "s3://${S3_BUCKET}/config.js" \
+            --cache-control "no-cache"
+
+      - name: Invalidate CloudFront
+        env:
+          CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+        run: |
+          if [ -z "${CLOUDFRONT_DISTRIBUTION_ID}" ]; then
+            echo "CLOUDFRONT_DISTRIBUTION_ID is empty"
+            exit 1
+          fi
+          aws cloudfront create-invalidation \
+            --distribution-id "${CLOUDFRONT_DISTRIBUTION_ID}" \
+            --paths "/index.html" "/config.js" "/"

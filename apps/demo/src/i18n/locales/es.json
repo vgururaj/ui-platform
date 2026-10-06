@@ -1,0 +1,30 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "items": "Elementos",
+    "forms": "Formularios",
+    "uploads": "Subidas",
+    "tabs": "Pestañas",
+    "access": "Acceso",
+    "admin": "Admin",
+    "errors": "Errores",
+    "profile": "Perfil",
+    "settings": "Ajustes",
+    "logout": "Cerrar sesión"
+  },
+  "login": {
+    "title": "Iniciar sesión",
+    "email": "Correo",
+    "password": "Contraseña",
+    "submit": "Entrar",
+    "google": "Continuar con Google",
+    "help": "Usuarios demo: admin@demo.local / user@demo.local / viewer@demo.local — contraseña: password",
+    "googleHint": "Solo presentacional — sustituye AuthAdapter por OIDC real más adelante."
+  },
+  "common": {
+    "theme": "Tema",
+    "locale": "Idioma",
+    "search": "Buscar",
+    "loading": "Cargando…"
+  }
+}

@@ -1,0 +1,14 @@
+# One image. Per-env values are runtime `environment` (not build-args).
+services:
+  demo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    environment:
+      VITE_APP_ENV: ${VITE_APP_ENV:-local}
+      VITE_APP_NAME: ${VITE_APP_NAME:-ui-platform demo}
+      VITE_API_BASE_URL: ${VITE_API_BASE_URL:-/api}
+      VITE_SENTRY_DSN: ${VITE_SENTRY_DSN:-}
+      VITE_ENABLE_MOCKS: ${VITE_ENABLE_MOCKS:-true}

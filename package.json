@@ -1,0 +1,70 @@
+{
+  "name": "ui-platform",
+  "private": true,
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "turbo run dev --filter=@vgururaj/demo",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:e2e": "pnpm --filter @vgururaj/demo test:e2e",
+    "test:e2e:install": "pnpm --filter @vgururaj/demo test:e2e:install",
+    "test:coverage": "pnpm --filter @vgururaj/ui --filter @vgururaj/auth exec vitest run --coverage",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check:ci": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "secrets:check": "node scripts/secrets-check.mjs",
+    "audit:check": "node scripts/audit-check.mjs",
+    "audit:scaffold": "node scripts/audit-scaffold-parity.mjs",
+    "size:check": "node scripts/size-check.mjs",
+    "docker:build": "sh scripts/docker-build.sh",
+    "docker:run": "sh scripts/docker-run.sh",
+    "config:generate": "node scripts/generate-runtime-config.mjs",
+    "verify": "pnpm secrets:check && pnpm audit:scaffold && pnpm check:ci && pnpm size:check",
+    "verify:all": "pnpm verify && pnpm audit:check && pnpm test:e2e && pnpm docker:build",
+    "storybook": "pnpm --filter @vgururaj/ui storybook",
+    "prepare": "husky || true"
+  },
+  "devDependencies": {
+    "eslint": "^9.22.0",
+    "husky": "^9.1.7",
+    "iconv-lite": "^0.7.3",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.5.3",
+    "turbo": "^2.4.4",
+    "typescript": "^5.8.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "tinypool": ">=2.1.2"
+    }
+  },
+  "lint-staged": {
+    "apps/demo/**/*.{js,jsx,ts,tsx}": [
+      "pnpm --filter @vgururaj/demo exec eslint --fix",
+      "prettier --write"
+    ],
+    "templates/vite-react/**/*.{js,jsx,ts,tsx}": [
+      "pnpm --filter @vgururaj/vite-react-template exec eslint --fix",
+      "prettier --write"
+    ],
+    "packages/ui/**/*.{js,jsx,ts,tsx}": [
+      "pnpm --filter @vgururaj/ui exec eslint --fix",
+      "prettier --write"
+    ],
+    "packages/auth/**/*.{js,jsx,ts,tsx}": [
+      "pnpm --filter @vgururaj/auth exec eslint --fix",
+      "prettier --write"
+    ],
+    "packages/http/**/*.{js,jsx,ts,tsx}": [
+      "pnpm --filter @vgururaj/http exec eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,css,js,mjs,cjs}": "prettier --write"
+  }
+}
