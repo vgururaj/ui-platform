@@ -1,10 +1,18 @@
 {
   "name": "@vgururaj/tsconfig",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
   "files": [
     "base.json",
     "react-library.json",
     "vite-app.json"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vgururaj/ui-platform.git",
+    "directory": "packages/tsconfig"
+  }
 }

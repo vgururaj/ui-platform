@@ -15,8 +15,8 @@ Package path: [`templates/vite-react`](../templates/vite-react). It is a **runna
 2. Rename `name` in `package.json`.
 3. Dependencies:
    - **Monorepo:** keep `workspace:*` (ensure the path is under `apps/*` or `templates/*` in `pnpm-workspace.yaml`).
-   - **Separate repo:** after packages are published, use semver ranges + registry auth — see [MAINTENANCE.md](MAINTENANCE.md). Until publish, use `link:` / `file:` to a local ui-platform checkout (or clone packages into the app) — `workspace:*` only works inside this monorepo.
-4. Adjust Vite aliases / `tsconfig` paths if the relative location of `packages/ui` and `packages/auth` changes.
+   - **Separate repo:** prefer GitHub Packages — `"@vgururaj/ui": "^0.1.0"` (etc.) + app `.npmrc` for `@vgururaj` → `https://npm.pkg.github.com` and `NODE_AUTH_TOKEN` — see [MAINTENANCE.md](MAINTENANCE.md#consuming-packages-in-a-separate-app-repo). Until publish, use `link:` / `file:` to a local ui-platform checkout — `workspace:*` only works inside this monorepo.
+4. Adjust Vite aliases / `tsconfig` paths: in a separate repo on published packages, **remove** aliases into `packages/*` so resolution uses `node_modules`.
 5. **Fix monorepo-only Vite imports** (required for a separate repo — see below).
 6. Keep runtime config: `/config.js` → `window.__ENV__` (see demo or template `src/config/env.ts`). Deploy with `pnpm config:generate` from SSM or env — [DEPLOY.md](DEPLOY.md).
 7. Use `@vgururaj/http` via `src/lib/api.ts` (`createHttpClient`) and feature `api/*` + Zod schemas — ESLint preset `@vgururaj/eslint-config/vite-app` enforces this.

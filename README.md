@@ -162,7 +162,7 @@ Do **not** use aliases (`development`, `stg`, `stage`, `prod`, …). Deploy CI f
 2. Run `pnpm install` then `pnpm check`.
 3. For majors (React, Tailwind, Router), follow [docs/MAINTENANCE.md](docs/MAINTENANCE.md).
 
-Workspace packages are linked locally inside **this** repo. When a **separate** app repo needs the published packages (`@vgururaj/ui`, `@vgururaj/auth`, …), see MAINTENANCE.md for registry steps.
+Workspace packages are linked locally inside **this** repo. Published packages go to **GitHub Packages** (`pnpm publish:packages` or Actions → **Publish packages**). Separate app repos: see [docs/MAINTENANCE.md](docs/MAINTENANCE.md#publishing-packages-github-packages).
 
 ## Creating a new app
 
@@ -188,6 +188,7 @@ Do **not** fork the demo. Use `templates/vite-react` — see [docs/CREATING_AN_A
 | `pnpm docker:build`            | Build demo nginx image (local)                              |
 | `pnpm docker:run`              | Build once + run with runtime env on :8080                  |
 | `pnpm config:generate`         | Write `config.js` from env or AWS SSM                       |
+| `pnpm publish:packages`        | Build + publish `packages/*` to GitHub Packages             |
 | `pnpm storybook`               | UI Storybook                                                |
 | `pnpm format` / `format:check` | Prettier                                                    |
 

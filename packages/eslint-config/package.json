@@ -1,13 +1,24 @@
 {
   "name": "@vgururaj/eslint-config",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
   "type": "module",
   "exports": {
     ".": "./index.js",
     "./base": "./base.js",
     "./package-lib": "./package-lib.js",
     "./vite-app": "./vite-app.js"
+  },
+  "files": [
+    "*.js"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vgururaj/ui-platform.git",
+    "directory": "packages/eslint-config"
   },
   "peerDependencies": {
     "eslint": "^9.0.0",

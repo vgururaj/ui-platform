@@ -28,6 +28,7 @@
     "verify": "pnpm secrets:check && pnpm audit:scaffold && pnpm check:ci && pnpm size:check",
     "verify:all": "pnpm verify && pnpm audit:check && pnpm test:e2e && pnpm docker:build",
     "storybook": "pnpm --filter @vgururaj/ui storybook",
+    "publish:packages": "pnpm --filter @vgururaj/ui --filter @vgururaj/auth --filter @vgururaj/http build && pnpm -r --filter './packages/*' publish --access public --no-git-checks",
     "prepare": "husky || true"
   },
   "devDependencies": {

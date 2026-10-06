@@ -21,31 +21,78 @@ pnpm config:generate  # refresh config.js from env or SSM
 
 ## Semver for packages in this monorepo
 
-Published names use the `@vgururaj/…` npm scope (`@vgururaj/ui`, `@vgururaj/auth`, …). While packages are `private` and workspace-only inside **ui-platform**, treat versions as informational. When you publish:
+Published names use the `@vgururaj/…` npm scope (`@vgururaj/ui`, `@vgururaj/auth`, …) on **GitHub Packages**.
 
 - **patch** — bugfixes, no API change
 - **minor** — additive API
 - **major** — breaking peers (e.g. React major) or removed exports
 
-Apps upgrade via dependency bumps + their own CI.
+Bump the version in each package’s `package.json` before publishing again. Apps upgrade via dependency bumps + their own CI.
 
-## Publishing packages (when needed)
+## Publishing packages (GitHub Packages)
 
-Only when a **separate app repo** must `pnpm add @vgururaj/ui` (or auth).
+Publishable packages under `packages/`: `@vgururaj/tsconfig`, `@vgururaj/eslint-config`, `@vgururaj/http`, `@vgururaj/auth`, `@vgururaj/ui`. Registry: `https://npm.pkg.github.com`. Scope owner must match the GitHub user/org (`vgururaj`).
 
-1. Authenticate to your registry (npm or GitHub Packages).
-2. Set `publishConfig` / remove `"private": true` on packages you intend to publish.
-3. Publish `@vgururaj/ui`, `@vgururaj/auth`, and `@vgururaj/http` (and tooling packages if consumers need them).
-4. In the app repo, configure `.npmrc` for scope `@vgururaj` and replace `workspace:*` with semver ranges.
-5. Enable Dependabot/Renovate on consuming apps.
+### Auth (local)
 
-Until then, workspace linking in this monorepo is enough.
+Create a classic PAT with `read:packages` + `write:packages` (and `repo` if the source repo is private). Then either:
+
+```bash
+export NODE_AUTH_TOKEN=<PAT>
+# one-time or per shell — do not commit tokens
+npm login --scope=@vgururaj --auth-type=legacy --registry=https://npm.pkg.github.com
+# Username: your GitHub username
+# Password: the PAT (not your GitHub password)
+```
+
+Or write to `~/.npmrc` (machine-local):
+
+```ini
+@vgururaj:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+```
+
+### Publish
+
+From the ui-platform root (clean tree preferred):
+
+```bash
+pnpm publish:packages
+```
+
+That builds `ui` / `auth` / `http`, then runs `pnpm publish` for every package under `packages/*`.
+
+**CI:** GitHub → Actions → **Publish packages** → Run workflow (uses `GITHUB_TOKEN` with `packages: write`). Workflow file: [`.github/workflows/publish-packages.yml`](../.github/workflows/publish-packages.yml).
+
+After a successful publish, packages appear under the repo’s **Packages** tab (e.g. `https://github.com/vgururaj/ui-platform/packages`).
+
+### Re-publish
+
+1. Bump `"version"` in the package(s) you changed.
+2. `pnpm verify` (or at least build + tests for those packages).
+3. `pnpm publish:packages` or re-run the workflow.
+
+npm/GitHub Packages reject re-uploading the same version.
+
+## Consuming packages in a separate app repo
+
+In the app repo root, add `.npmrc` (safe to commit — token stays in env):
+
+```ini
+@vgururaj:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+```
+
+Set `NODE_AUTH_TOKEN` to a PAT with at least `read:packages` before `pnpm install` (CI: repository secret).
+
+Replace `workspace:*` / `link:` with semver, e.g. `"@vgururaj/ui": "^0.1.0"`. Remove Vite/tsconfig aliases that pointed at a local ui-platform checkout; resolve from `node_modules`. See [CREATING_AN_APP.md](CREATING_AN_APP.md).
 
 ## React / major upgrades
 
 1. Widen or bump `peerDependencies` in `ui`, `auth`, and `http` as needed.
 2. Upgrade demo and template; run `pnpm verify:all`.
 3. Note breaking changes in [DECISIONS.md](DECISIONS.md) or a changelog.
+4. Bump package versions and publish.
 
 ## Deploy / config ops
 

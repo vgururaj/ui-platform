@@ -1,7 +1,6 @@
 {
   "name": "@vgururaj/http",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -15,6 +14,15 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vgururaj/ui-platform.git",
+    "directory": "packages/http"
+  },
   "scripts": {
     "build": "tsup",
     "typecheck": "tsc --noEmit",
