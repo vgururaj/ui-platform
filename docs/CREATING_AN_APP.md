@@ -40,6 +40,13 @@ That path exists only inside this monorepo (`templates/vite-react` → `scripts/
 
 Also check for any other `../../packages/...` or `../../scripts/...` aliases in Vite/tsconfig; they will break the same way. Prefer package names (`@vgururaj/ui`, …) once dependencies resolve from the registry or `link:`/`file:`.
 
+In `src/styles.css`, replace monorepo Tailwind `@source "../../../packages/..."` with scans of the installed packages, e.g.:
+
+```css
+@source "../node_modules/@vgururaj/ui/dist/**/*.{js,mjs}";
+@source "../node_modules/@vgururaj/auth/dist/**/*.{js,mjs}";
+```
+
 Source of truth for the helper: [`scripts/vite-manual-chunks.mjs`](../scripts/vite-manual-chunks.mjs). When you change chunking in ui-platform, re-copy or re-sync into out-of-monorepo apps.
 
 ## Do not
