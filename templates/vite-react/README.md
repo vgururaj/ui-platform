@@ -38,8 +38,9 @@ MSW, Playwright, i18n, Motion shell polish, items/forms/uploads/tabs inventory, 
 1. Copy `templates/vite-react` to your target (`apps/<name>` or a separate repo).
 2. Rename `name` in `package.json`.
 3. Adjust Vite aliases / `tsconfig` paths if the relative location of `packages/*` changes.
-4. Replace `MockAuthAdapter` with your real `AuthAdapter` when ready.
-5. When packages are published, swap `workspace:*` for semver ranges.
+4. **Separate repo only:** `vite.config.ts` imports `../../scripts/vite-manual-chunks.mjs` from the ui-platform root — that file is **not** in the copied folder. Copy [`scripts/vite-manual-chunks.mjs`](../../scripts/vite-manual-chunks.mjs) into your app (or inline `platformManualChunks`) and fix the import, or Vite will fail to start. Same for any other `../../packages|scripts/...` paths. See [CREATING_AN_APP.md](../../docs/CREATING_AN_APP.md#separate-repo-vite-manualchunks-and-other-relative-paths).
+5. Replace `MockAuthAdapter` with your real `AuthAdapter` when ready.
+6. When packages are published, swap `workspace:*` for semver ranges (until then use `link:` / `file:` — `workspace:*` only works inside ui-platform).
 
 Do not copy `apps/demo` wholesale — that harness is exhaustive. Use this template as the starting tree and pull individual patterns from the demo when needed.
 

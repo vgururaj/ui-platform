@@ -57,5 +57,5 @@ Until then, workspace linking in this monorepo is enough.
 
 - New **required** wiring → update the template + [CREATING_AN_APP.md](CREATING_AN_APP.md) **and** extend `scripts/audit-scaffold-parity.mjs` so `pnpm audit:scaffold` catches future drift
 - Exhaustive examples stay in the demo only (see the file ownership table in [ARCHITECTURE.md](ARCHITECTURE.md))
-- Shared Vite chunk splitting lives in `scripts/vite-manual-chunks.mjs` (both apps import it)
+- Shared Vite chunk splitting lives in `scripts/vite-manual-chunks.mjs` (both apps import it). Out-of-monorepo copies must vendor or inline that file — see [CREATING_AN_APP.md](CREATING_AN_APP.md#separate-repo-vite-manualchunks-and-other-relative-paths)
 - Update the root README scripts table when scripts change
