@@ -162,7 +162,7 @@ Do **not** use aliases (`development`, `stg`, `stage`, `prod`, …). Deploy CI f
 2. Run `pnpm install` then `pnpm check`.
 3. For majors (React, Tailwind, Router), follow [docs/MAINTENANCE.md](docs/MAINTENANCE.md).
 
-Workspace packages are linked locally inside **this** repo. Published packages go to **GitHub Packages** (`pnpm publish:packages` or Actions → **Publish packages**). Separate app repos: see [docs/MAINTENANCE.md](docs/MAINTENANCE.md#publishing-packages-github-packages).
+Workspace packages are linked locally inside **this** repo. Published packages go to **GitHub Packages** (`pnpm publish:packages` or Actions → **Publish packages**). Separate app repos: [docs/MAINTENANCE.md](docs/MAINTENANCE.md#publishing-packages-github-packages) + full copy-out checklist in [docs/CREATING_AN_APP.md](docs/CREATING_AN_APP.md).
 
 ## Creating a new app
 

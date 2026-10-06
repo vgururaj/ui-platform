@@ -36,11 +36,14 @@ MSW, Playwright, i18n, Motion shell polish, items/forms/uploads/tabs inventory, 
 ## Copy out for a new app
 
 1. Copy `templates/vite-react` to your target (`apps/<name>` or a separate repo).
-2. Rename `name` in `package.json`.
-3. Adjust Vite aliases / `tsconfig` paths if the relative location of `packages/*` changes.
-4. **Separate repo only:** `vite.config.ts` imports `../../scripts/vite-manual-chunks.mjs` from the ui-platform root — that file is **not** in the copied folder. Copy [`scripts/vite-manual-chunks.mjs`](../../scripts/vite-manual-chunks.mjs) into your app (or inline `platformManualChunks`) and fix the import, or Vite will fail to start. Same for any other `../../packages|scripts/...` paths. See [CREATING_AN_APP.md](../../docs/CREATING_AN_APP.md#separate-repo-vite-manualchunks-and-other-relative-paths).
-5. Replace `MockAuthAdapter` with your real `AuthAdapter` when ready.
-6. When packages are published, swap `workspace:*` for semver ranges (until then use `link:` / `file:` — `workspace:*` only works inside ui-platform).
+2. Rename `name` in `package.json`. Separate repo: add `packageManager` / `engines` / `.nvmrc` as in [CREATING_AN_APP.md](../../docs/CREATING_AN_APP.md).
+3. **Separate repo — path cleanup (all required):**
+   - Copy [`scripts/vite-manual-chunks.mjs`](../../scripts/vite-manual-chunks.mjs) into the app (or inline) and fix `vite.config.ts` import — see [CREATING_AN_APP.md](../../docs/CREATING_AN_APP.md#separate-repo-vite-manualchunks-and-other-relative-paths).
+   - Remove `@vgururaj/*` → `../../packages/...` aliases from **`vite.config.ts`**, **`vitest.config.ts`**, and **`tsconfig.json`** (keep `@` → `./src` only).
+   - Replace Tailwind `@source "../../../packages/..."` in `src/styles.css` with `node_modules/@vgururaj/*/dist` scans — see [CREATING_AN_APP.md](../../docs/CREATING_AN_APP.md#separate-repo-tailwind-source).
+4. Swap `workspace:*` for published semver (`^0.1.0`) + `.npmrc` + `NODE_AUTH_TOKEN`, or use `link:` / `file:` until publish — [MAINTENANCE.md](../../docs/MAINTENANCE.md#consuming-packages-in-a-separate-app-repo).
+5. Optional: minimal CI (lint / typecheck / test / build) with Actions secret `NODE_AUTH_TOKEN` — [CREATING_AN_APP.md](../../docs/CREATING_AN_APP.md#separate-repo-minimal-ci).
+6. Replace `MockAuthAdapter` with your real `AuthAdapter` when ready.
 
 Do not copy `apps/demo` wholesale — that harness is exhaustive. Use this template as the starting tree and pull individual patterns from the demo when needed.
 

@@ -83,9 +83,11 @@ In the app repo root, add `.npmrc` (safe to commit — token stays in env):
 //npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
 ```
 
-Set `NODE_AUTH_TOKEN` to a PAT with at least `read:packages` before `pnpm install` (CI: repository secret).
+Set `NODE_AUTH_TOKEN` to a PAT with at least `read:packages` before `pnpm install`. For GitHub Actions, store the same value as a **repository secret** named `NODE_AUTH_TOKEN` and pass `env: NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}` on the install step.
 
-Replace `workspace:*` / `link:` with semver, e.g. `"@vgururaj/ui": "^0.1.0"`. Remove Vite/tsconfig aliases that pointed at a local ui-platform checkout; resolve from `node_modules`. See [CREATING_AN_APP.md](CREATING_AN_APP.md).
+Replace `workspace:*` / `link:` with semver, e.g. `"@vgururaj/ui": "^0.1.0"` (also `auth`, `http`, `eslint-config`, `tsconfig` as needed).
+
+Then strip monorepo-only wiring — Vite **and** Vitest aliases, tsconfig paths, Tailwind `@source`, and `vite-manual-chunks` — documented in [CREATING_AN_APP.md](CREATING_AN_APP.md) (separate-repo sections). If you only fix Vite, `pnpm test` / CI often still fails.
 
 ## React / major upgrades
 
