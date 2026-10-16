@@ -99,3 +99,23 @@ export {
   type UploadWithProgressOptions,
   type UploadWithProgressResult,
 } from './upload/upload-with-progress';
+
+export { parseLocalDateTime, toLocalDateTimeValue } from './lib/local-datetime';
+export { isUsPhoneNumber, phoneFieldError, emailFieldError } from './lib/contact';
+export { DateTimePicker, type DateTimePickerProps } from './components/date-time-picker';
+export {
+  THEME_PRESETS,
+  THEME_MODES,
+  isThemePresetId,
+  isThemeMode,
+  type ThemePresetId,
+  type ThemeMode,
+} from './theme/presets';
+export {
+  createThemeStore,
+  type ThemeStoreOptions,
+  type ThemeState,
+  type ThemeStoreHook,
+} from './theme/theme-store';
+export { ThemeToggle, type ThemeToggleProps } from './theme/theme-toggle';
+export { ThemePicker, type ThemePickerProps } from './theme/theme-picker';

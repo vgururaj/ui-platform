@@ -30,3 +30,10 @@ export {
   type RequireAuthOptions,
   type RequirePermissionOptions,
 } from './guards';
+
+export {
+  BearerAuthAdapter,
+  createBearerAuthAdapter,
+  type BearerAuthAdapterOptions,
+  type BearerAuthFetch,
+} from './bearer-adapter';
