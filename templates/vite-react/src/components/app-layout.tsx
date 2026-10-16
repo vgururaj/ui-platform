@@ -1,6 +1,13 @@
 import { Link, Outlet, useNavigate, useRouterState } from '@tanstack/react-router';
 import { useAuth } from '@vgururaj/auth';
-import { AppShell, Button, ThemePicker, ThemeToggle } from '@vgururaj/ui';
+import {
+  AppShell,
+  Button,
+  SidebarNav,
+  ThemePicker,
+  ThemeToggle,
+  isNavPathActive,
+} from '@vgururaj/ui';
 import { env } from '@/config/env';
 import { useThemeStore } from '@/stores/theme-store';
 
@@ -20,24 +27,18 @@ export function AppLayout() {
       sidebar={
         <div className="flex h-full flex-col">
           <div className="border-b px-4 py-4 text-sm font-semibold">{env.VITE_APP_NAME}</div>
-          <nav className="flex flex-col gap-1 p-3">
-            {navItems.map((item) => {
-              const active = item.to === '/' ? pathname === '/' : pathname.startsWith(item.to);
-              return (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className={`rounded-md px-3 py-2 text-sm transition-colors ${
-                    active
-                      ? 'bg-accent text-accent-foreground'
-                      : 'text-muted-foreground hover:bg-muted'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+          <SidebarNav
+            items={navItems.map((item) => ({
+              id: item.to,
+              label: item.label,
+              active: isNavPathActive(pathname, item.to),
+            }))}
+            renderItem={(item, { className }) => (
+              <Link to={item.id} className={className}>
+                {item.label}
+              </Link>
+            )}
+          />
         </div>
       }
       header={

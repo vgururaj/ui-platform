@@ -1,6 +1,7 @@
 import { z } from 'zod';
+import { createRuntimeEnv } from '@vgururaj/config';
 
-/** Known demo keys (typed). Extra keys from config.js / SSM are available via `runtimeEnv` / `getRuntimeEnv`. */
+/** Allowlisted public configuration; backend and build secrets are never runtime values. */
 const knownSchema = z.object({
   VITE_APP_ENV: z.enum(['local', 'dev', 'staging', 'production']).default('local'),
   VITE_APP_NAME: z.string().default('ui-platform demo'),
@@ -13,38 +14,15 @@ const knownSchema = z.object({
     .transform((v) => v !== 'false'),
 });
 
-/**
- * Full runtime map: every key from `window.__ENV__` (SSM / config:generate / Docker).
- * Prefer this when adding new settings — no code change required beyond reading the key.
- */
-function readAllRaw(): Record<string, string> {
-  const runtime =
-    typeof window !== 'undefined' && window.__ENV__ && typeof window.__ENV__ === 'object'
-      ? window.__ENV__
-      : undefined;
+const { runtimeEnv, env, getRuntimeEnv } = createRuntimeEnv({
+  schema: knownSchema,
+  buildValues: {
+    VITE_APP_ENV: import.meta.env.VITE_APP_ENV,
+    VITE_APP_NAME: import.meta.env.VITE_APP_NAME,
+    VITE_API_BASE_URL: import.meta.env.VITE_API_BASE_URL,
+    VITE_SENTRY_DSN: import.meta.env.VITE_SENTRY_DSN,
+    VITE_ENABLE_MOCKS: import.meta.env.VITE_ENABLE_MOCKS,
+  },
+});
 
-  if (runtime) {
-    const out: Record<string, string> = {};
-    for (const [k, v] of Object.entries(runtime)) {
-      if (v !== undefined && v !== null) out[k] = String(v);
-    }
-    return out;
-  }
-
-  const out: Record<string, string> = {};
-  const meta = import.meta.env as Record<string, string | undefined>;
-  for (const [k, v] of Object.entries(meta)) {
-    if (k.startsWith('VITE_') && v !== undefined) out[k] = String(v);
-  }
-  return out;
-}
-
-export const runtimeEnv: Readonly<Record<string, string>> = readAllRaw();
-
-/** Typed accessors for built-in demo settings. */
-export const env = knownSchema.parse(runtimeEnv);
-
-/** Read any runtime key (from SSM / config.js) with optional default. */
-export function getRuntimeEnv(key: string, fallback = ''): string {
-  return runtimeEnv[key] ?? fallback;
-}
+export { runtimeEnv, env, getRuntimeEnv };

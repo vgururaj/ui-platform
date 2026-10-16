@@ -31,7 +31,7 @@ Bump the version in each package’s `package.json` before publishing again. App
 
 ## Publishing packages (GitHub Packages)
 
-Publishable packages under `packages/`: `@vgururaj/tsconfig`, `@vgururaj/eslint-config`, `@vgururaj/http`, `@vgururaj/auth`, `@vgururaj/ui`. Registry: `https://npm.pkg.github.com`. Scope owner must match the GitHub user/org (`vgururaj`).
+Publishable packages under `packages/`: `@vgururaj/tsconfig`, `@vgururaj/eslint-config`, `@vgururaj/http`, `@vgururaj/auth`, `@vgururaj/ui`, `@vgururaj/config`. Registry: `https://npm.pkg.github.com`. Scope owner must match the GitHub user/org (`vgururaj`).
 
 ### Auth (local)
 

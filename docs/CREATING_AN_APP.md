@@ -22,6 +22,10 @@ export const useThemeStore = createThemeStore({
 });
 ```
 
+### Runtime env
+
+Use `createRuntimeEnv` from `@vgururaj/config` with an allowlisted `buildValues` map of explicit `import.meta.env.KEY` refs (do not dump all `VITE_*`). See the template `src/config/env.ts`.
+
 Put `<ThemePicker useThemeStore={useThemeStore} />` and `<ThemeToggle useThemeStore={useThemeStore} />` in the shell header. CSS tokens live in `@vgururaj/ui/styles.css` under `[data-theme='…']` plus `.dark`.
 
 ## New product app

@@ -12,6 +12,7 @@ The strings `@vgururaj/ui`, `@vgururaj/auth`, etc. are **npm package names** (th
 | `packages/ui`            | `@vgururaj/ui` — design tokens, primitives, charts, upload helper    |
 | `packages/auth`          | `@vgururaj/auth` — AuthN adapter + permission AuthZ (`Can`, guards)  |
 | `packages/http`          | `@vgururaj/http` — Zod-validated `apiFetchParsed` HTTP client        |
+| `packages/config`        | `@vgururaj/config` — allowlisted Vite/runtime env factory            |
 | `packages/tsconfig`      | Shared TypeScript configs                                            |
 | `packages/eslint-config` | Shared ESLint presets (`base`, `package-lib`, `vite-app`)            |
 | `templates/vite-react`   | Runnable starter (`@vgururaj/vite-react-template`) for new apps      |
