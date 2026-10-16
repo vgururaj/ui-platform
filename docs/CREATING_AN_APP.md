@@ -7,7 +7,22 @@ pnpm install
 pnpm --filter @vgururaj/vite-react-template dev
 ```
 
-Package path: [`templates/vite-react`](../templates/vite-react). It is a **runnable** Vite + React 19 app with day-1 scaffold wiring: Query + Toaster, Zod `env`, `@vgururaj/http`, RHF login schema, theme store, Sentry stub, `ErrorBoundary`, Vitest, login/home/`requirePermission` admin/`Can` on `/access`, runtime `config.js`.
+Package path: [`templates/vite-react`](../templates/vite-react). It is a **runnable** Vite + React 19 app with day-1 scaffold wiring: Query + Toaster, Zod `env`, `@vgururaj/http`, RHF login schema, theme store + ThemePicker/ThemeToggle (named palettes), Sentry stub, `ErrorBoundary`, Vitest, login/home/`requirePermission` admin/`Can` on `/access`, runtime `config.js`.
+
+## Themes (v0.2+)
+
+`@vgururaj/ui` ships **color mode** (light / dark / system) and **named palettes** (Default, Slate, Emerald, Violet):
+
+```ts
+import { createThemeStore, ThemePicker, ThemeToggle } from '@vgururaj/ui';
+
+export const useThemeStore = createThemeStore({
+  modeStorageKey: 'app-theme-mode',
+  presetStorageKey: 'app-theme-preset',
+});
+```
+
+Put `<ThemePicker useThemeStore={useThemeStore} />` and `<ThemeToggle useThemeStore={useThemeStore} />` in the shell header. CSS tokens live in `@vgururaj/ui/styles.css` under `[data-theme='…']` plus `.dark`.
 
 ## New product app
 
@@ -15,7 +30,7 @@ Package path: [`templates/vite-react`](../templates/vite-react). It is a **runna
 2. Rename `name` in `package.json`. For a separate repo, also set `"packageManager": "pnpm@9.15.9"`, `"engines": { "node": ">=20" }`, and add a root `.nvmrc` with `20` (matches this scaffold; helps CI).
 3. Dependencies:
    - **Monorepo:** keep `workspace:*` (ensure the path is under `apps/*` or `templates/*` in `pnpm-workspace.yaml`).
-   - **Separate repo:** prefer GitHub Packages — `"@vgururaj/ui": "^0.1.0"` (same for `auth`, `http`, `eslint-config`, `tsconfig`) + app `.npmrc` for `@vgururaj` → `https://npm.pkg.github.com` and `NODE_AUTH_TOKEN` — see [MAINTENANCE.md](MAINTENANCE.md#consuming-packages-in-a-separate-app-repo). Until publish, use `link:` / `file:` to a local ui-platform checkout — `workspace:*` only works inside this monorepo.
+   - **Separate repo:** prefer GitHub Packages — `"@vgururaj/ui": "^0.2.0"` (same for `auth`, `http`, `eslint-config`, `tsconfig`) + app `.npmrc` for `@vgururaj` → `https://npm.pkg.github.com` and `NODE_AUTH_TOKEN` — see [MAINTENANCE.md](MAINTENANCE.md#consuming-packages-in-a-separate-app-repo). Until publish, use `link:` / `file:` to a local ui-platform checkout — `workspace:*` only works inside this monorepo.
 4. **Separate repo — strip monorepo path aliases** in **`vite.config.ts`**, **`vitest.config.ts`**, and **`tsconfig.json`**. The template aliases `@vgururaj/*` into `../../packages/...`. Those paths do not exist outside this monorepo. Keep only the `@` → `./src` alias and resolve packages from `node_modules`. Leaving Vitest aliases in place is a common failure: `pnpm dev` works, but `pnpm test` / CI cannot resolve `@vgururaj/http`.
 5. **Fix monorepo-only Vite imports** — copy or inline `scripts/vite-manual-chunks.mjs` (see below).
 6. **Fix Tailwind `@source`** in `src/styles.css` for published packages (see below).

@@ -1,31 +1,14 @@
 import { Link, Outlet, useNavigate, useRouterState } from '@tanstack/react-router';
 import { useAuth } from '@vgururaj/auth';
-import { AppShell, Button } from '@vgururaj/ui';
-import { Monitor, Moon, Sun } from 'lucide-react';
+import { AppShell, Button, ThemePicker, ThemeToggle } from '@vgururaj/ui';
 import { env } from '@/config/env';
-import { useThemeStore, type ThemeMode } from '@/stores/theme-store';
+import { useThemeStore } from '@/stores/theme-store';
 
 const navItems = [
   { to: '/', label: 'Home' },
   { to: '/admin', label: 'Admin' },
   { to: '/access', label: 'Access' },
 ] as const;
-
-function ThemeToggle() {
-  const { mode, cycle } = useThemeStore();
-  const Icon = mode === 'dark' ? Moon : mode === 'light' ? Sun : Monitor;
-  return (
-    <Button
-      variant="ghost"
-      size="icon"
-      onClick={cycle}
-      aria-label={`Theme: ${mode}`}
-      title={`Theme: ${mode as ThemeMode}`}
-    >
-      <Icon className="h-4 w-4" />
-    </Button>
-  );
-}
 
 export function AppLayout() {
   const { user, logout } = useAuth();
@@ -59,7 +42,8 @@ export function AppLayout() {
       }
       header={
         <div className="ml-auto flex items-center gap-3">
-          <ThemeToggle />
+          <ThemePicker useThemeStore={useThemeStore} />
+          <ThemeToggle useThemeStore={useThemeStore} />
           <span className="text-sm text-muted-foreground">{user?.email}</span>
           <Button
             type="button"

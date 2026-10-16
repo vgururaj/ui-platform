@@ -18,6 +18,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  ThemeToggle,
+  ThemePicker,
 } from '@vgururaj/ui';
 import {
   LayoutDashboard,
@@ -29,15 +31,12 @@ import {
   Lock,
   Bug,
   Menu,
-  Moon,
-  Sun,
-  Monitor,
   LogOut,
   User,
   Settings,
 } from 'lucide-react';
 import { useState } from 'react';
-import { useThemeStore, type ThemeMode } from '@/stores/theme-store';
+import { useThemeStore } from '@/stores/theme-store';
 import i18n from '@/i18n';
 
 const navItems = [
@@ -83,23 +82,6 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
         return link;
       })}
     </nav>
-  );
-}
-
-function ThemeToggle() {
-  const { mode, cycle } = useThemeStore();
-  const Icon = mode === 'dark' ? Moon : mode === 'light' ? Sun : Monitor;
-  return (
-    <Button
-      variant="ghost"
-      size="icon"
-      onClick={cycle}
-      aria-label={`Theme: ${mode}`}
-      data-testid="theme-toggle"
-      title={`Theme: ${mode as ThemeMode}`}
-    >
-      <Icon className="h-4 w-4" />
-    </Button>
   );
 }
 
@@ -204,7 +186,10 @@ export function AppLayout() {
           <div className="font-medium md:hidden">ui-platform</div>
           <div className="ml-auto flex items-center gap-2">
             <LocaleSwitcher />
-            <ThemeToggle />
+            <ThemePicker useThemeStore={useThemeStore} />
+            <span data-testid="theme-toggle">
+              <ThemeToggle useThemeStore={useThemeStore} />
+            </span>
             <UserMenu />
           </div>
         </>
