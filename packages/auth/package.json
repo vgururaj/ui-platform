@@ -1,6 +1,6 @@
 {
   "name": "@vgururaj/auth",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -32,7 +32,11 @@
   },
   "peerDependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "@vgururaj/ui": "^0.3.0",
+    "react-hook-form": "^7.54.0",
+    "@hookform/resolvers": "^4.1.0",
+    "zod": "^3.24.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
@@ -48,6 +52,10 @@
     "react-dom": "^19.0.0",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2",
-    "vitest": "^3.0.9"
+    "vitest": "^3.0.9",
+    "@vgururaj/ui": "workspace:*",
+    "react-hook-form": "^7.54.2",
+    "@hookform/resolvers": "^4.1.3",
+    "zod": "^3.24.2"
   }
 }

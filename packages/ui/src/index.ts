@@ -119,3 +119,19 @@ export {
 } from './theme/theme-store';
 export { ThemeToggle, type ThemeToggleProps } from './theme/theme-toggle';
 export { ThemePicker, type ThemePickerProps } from './theme/theme-picker';
+
+export { Textarea, type TextareaProps } from './components/textarea';
+export { FieldError } from './components/field-error';
+export {
+  createFeatureApi,
+  type CreateFeatureApiOptions,
+  type FeatureApi,
+  type FeaturesState,
+} from './features/create-feature-api';
+export { navItemClass, isNavPathActive, type NavItemVariant } from './nav/nav-item-class';
+export {
+  SidebarNav,
+  type SidebarNavItem,
+  type SidebarNavProps,
+  type SidebarNavRenderProps,
+} from './nav/sidebar-nav';

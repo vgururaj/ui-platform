@@ -7,6 +7,15 @@ export default defineConfig({
   splitting: false,
   sourcemap: true,
   clean: true,
-  external: ['react', 'react-dom', 'react/jsx-runtime'],
+  external: [
+    'react',
+    'react-dom',
+    'react/jsx-runtime',
+    '@vgururaj/ui',
+    'react-hook-form',
+    '@hookform/resolvers',
+    '@hookform/resolvers/zod',
+    'zod',
+  ],
   treeshake: true,
 });
