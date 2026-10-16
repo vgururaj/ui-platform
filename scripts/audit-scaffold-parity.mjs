@@ -79,7 +79,9 @@ const CAPABILITIES = [
   ['src/routes/router.tsx', 'requirePermission'],
   ['src/routes/router.tsx', 'ErrorBoundary'],
   ['src/routes/router.tsx', 'lazyRouteComponent'],
-  ['src/features/auth/login-page.tsx', 'zodResolver'],
+  ['src/features/auth/login-page.tsx', 'LoginForm'],
+  ['src/config/env.ts', 'createRuntimeEnv'],
+  ['package.json', '"@vgururaj/config"'],
   ['vite.config.ts', 'platformManualChunks'],
   ['vite.config.ts', '@vgururaj/http'],
   ['package.json', '"@tanstack/react-query"'],
@@ -96,6 +98,7 @@ for (const [rel, needle] of CAPABILITIES) mustContain(rel, needle);
 const PACKAGE_FILES = [
   'packages/ui/src/components/error-boundary.tsx',
   'packages/http/src/index.ts',
+  'packages/config/src/index.ts',
   'packages/eslint-config/vite-app.js',
   'packages/eslint-config/package-lib.js',
   'scripts/vite-manual-chunks.mjs',
@@ -107,6 +110,9 @@ for (const rel of PACKAGE_FILES) {
 
 mustContain('packages/ui/src/index.ts', 'ErrorBoundary', root);
 mustContain('packages/http/src/index.ts', 'createHttpClient', root);
+mustContain('packages/config/src/index.ts', 'createRuntimeEnv', root);
+mustContain('packages/auth/src/index.ts', 'LoginForm', root);
+mustContain('packages/ui/src/index.ts', 'Textarea', root);
 mustContain('.gitignore', '*.tsbuildinfo', root);
 
 /** Docker build stage must include anything Vite configs import from repo root. */
