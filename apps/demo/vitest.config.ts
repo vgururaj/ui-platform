@@ -19,6 +19,14 @@ export default defineConfig({
         replacement: path.resolve(__dirname, '../../packages/auth/src/index.ts'),
       },
       {
+        find: '@vgururaj/http',
+        replacement: path.resolve(__dirname, '../../packages/http/src/index.ts'),
+      },
+      {
+        find: '@vgururaj/config',
+        replacement: path.resolve(__dirname, '../../packages/config/src/index.ts'),
+      },
+      {
         find: '@',
         replacement: path.resolve(__dirname, './src'),
       },

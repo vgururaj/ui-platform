@@ -28,6 +28,10 @@ export default defineConfig({
         replacement: path.resolve(__dirname, '../../packages/http/src/index.ts'),
       },
       {
+        find: '@vgururaj/config',
+        replacement: path.resolve(__dirname, '../../packages/config/src/index.ts'),
+      },
+      {
         find: '@',
         replacement: path.resolve(__dirname, './src'),
       },
@@ -37,7 +41,7 @@ export default defineConfig({
     port: 5174,
   },
   optimizeDeps: {
-    exclude: ['@vgururaj/ui', '@vgururaj/auth', '@vgururaj/http'],
+    exclude: ['@vgururaj/ui', '@vgururaj/auth', '@vgururaj/http', '@vgururaj/config'],
   },
   build: {
     chunkSizeWarningLimit: 500,
