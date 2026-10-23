@@ -20,6 +20,8 @@ import {
   SheetTrigger,
   ThemeToggle,
   ThemePicker,
+  isNavPathActive,
+  navItemClass,
 } from '@vgururaj/ui';
 import {
   LayoutDashboard,
@@ -57,15 +59,13 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <nav className="flex flex-col gap-1 p-3" data-testid="sidebar-nav">
       {navItems.map((item) => {
-        const active = item.to === '/' ? pathname === '/' : pathname.startsWith(item.to);
+        const active = isNavPathActive(pathname, item.to);
         const link = (
           <Link
             key={item.to}
             to={item.to}
             onClick={onNavigate}
-            className={`flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors ${
-              active ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:bg-muted'
-            }`}
+            className={navItemClass(active, { className: 'gap-2' })}
             data-testid={`nav-${item.to.replace(/\//g, '').replace(/^-/, '') || 'home'}`}
           >
             <item.icon className="h-4 w-4" />

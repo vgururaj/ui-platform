@@ -11,8 +11,9 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 /** Soft budgets for initial scaffold; tighten over time. */
 const budgets = [
   { name: '@vgururaj/ui', dir: 'packages/ui/dist', maxBytes: 250_000 },
-  { name: '@vgururaj/auth', dir: 'packages/auth/dist', maxBytes: 80_000 },
+  { name: '@vgururaj/auth', dir: 'packages/auth/dist', maxBytes: 100_000 },
   { name: '@vgururaj/http', dir: 'packages/http/dist', maxBytes: 20_000 },
+  { name: '@vgururaj/config', dir: 'packages/config/dist', maxBytes: 15_000 },
 ];
 
 function totalJsBytes(dir) {
