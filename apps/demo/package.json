@@ -19,7 +19,7 @@
     "@sentry/react": "^9.5.0",
     "@tanstack/react-query": "^5.69.0",
     "@tanstack/react-router": "^1.114.25",
-    "@tanstack/react-table": "^8.21.2",
+    "@tanstack/react-table": "^9.2.4",
     "@vgururaj/auth": "workspace:*",
     "@vgururaj/http": "workspace:*",
     "@vgururaj/ui": "workspace:*",
