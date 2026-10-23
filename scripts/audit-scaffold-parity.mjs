@@ -84,6 +84,7 @@ const CAPABILITIES = [
   ['package.json', '"@vgururaj/config"'],
   ['vite.config.ts', 'platformManualChunks'],
   ['vite.config.ts', '@vgururaj/http'],
+  ['vite.config.ts', '@vgururaj/config'],
   ['package.json', '"@tanstack/react-query"'],
   ['package.json', '"@sentry/react"'],
   ['package.json', '"zustand"'],
