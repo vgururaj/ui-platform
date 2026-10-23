@@ -52,7 +52,7 @@
     "react-dom": "^19.0.0",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2",
-    "vitest": "^3.0.9",
+    "vitest": "^5.0.5",
     "@vgururaj/ui": "workspace:*",
     "react-hook-form": "^7.54.2",
     "@hookform/resolvers": "^4.1.3",
