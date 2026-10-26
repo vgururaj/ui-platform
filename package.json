@@ -42,7 +42,10 @@
   },
   "pnpm": {
     "overrides": {
-      "tinypool": ">=2.1.2"
+      "tinypool": ">=2.1.2",
+      "vite": ">=6.4.4 <7",
+      "storybook": ">=8.6.19 <9",
+      "@storybook/core": ">=8.6.19 <9"
     }
   },
   "lint-staged": {

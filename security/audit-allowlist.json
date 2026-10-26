@@ -4,7 +4,14 @@
     {
       "id": "1240992",
       "package": "braces",
-      "reason": "No patched release on npm (advisory patched versions <0.0.0). Dev-only via lint-staged→micromatch; not in production bundle. Revisit when micromatch/braces ship a fix.",
+      "reason": "No patched release on npm (advisory patched versions <0.0.0). Dev-only via lint-staged\u2192micromatch; not in production bundle. Revisit when micromatch/braces ship a fix.",
+      "owner": "@vgururaj",
+      "expires": "2026-12-31"
+    },
+    {
+      "id": "1243066",
+      "package": "zod",
+      "reason": "Patched only in zod@>=4.6.6; apps/packages still on zod@3. Coordinated zod 4 upgrade tracked separately \u2014 do not silent-major via audit.",
       "owner": "@vgururaj",
       "expires": "2026-12-31"
     }
