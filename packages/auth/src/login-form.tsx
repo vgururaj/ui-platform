@@ -33,9 +33,18 @@ export type LoginFormProps = {
   passwordLabel?: string;
   errorTitle?: string;
   footer?: ReactNode;
+  /** Root card test id (e.g. `login-page`). Child ids default to `login-submit` / `login-error`. */
   'data-testid'?: string;
+  submitTestId?: string;
+  errorTestId?: string;
   onSubmit: (values: LoginFormValues) => Promise<void>;
 };
+
+/** `login-page` → `login`; otherwise use the id as-is for child prefixes. */
+function childTestIdPrefix(rootTestId: string | undefined): string | undefined {
+  if (!rootTestId) return undefined;
+  return rootTestId.replace(/-page$/, '');
+}
 
 /** Presentational login card — routing and auth adapter stay in the app. */
 export function LoginForm({
@@ -49,9 +58,14 @@ export function LoginForm({
   errorTitle = 'Login failed',
   footer,
   'data-testid': dataTestId,
+  submitTestId,
+  errorTestId,
   onSubmit,
 }: LoginFormProps) {
   const [error, setError] = useState<string | null>(null);
+  const childPrefix = childTestIdPrefix(dataTestId);
+  const resolvedSubmitTestId = submitTestId ?? (childPrefix ? `${childPrefix}-submit` : undefined);
+  const resolvedErrorTestId = errorTestId ?? (childPrefix ? `${childPrefix}-error` : undefined);
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: { email: '', password: '', ...defaultValues },
@@ -65,7 +79,7 @@ export function LoginForm({
       </CardHeader>
       <CardContent className="space-y-4">
         {error ? (
-          <Alert variant="destructive" data-testid={dataTestId ? `${dataTestId}-error` : undefined}>
+          <Alert variant="destructive" data-testid={resolvedErrorTestId}>
             <AlertTitle>{errorTitle}</AlertTitle>
             <AlertDescription>{error}</AlertDescription>
           </Alert>
@@ -100,7 +114,7 @@ export function LoginForm({
             type="submit"
             className="w-full"
             disabled={form.formState.isSubmitting}
-            data-testid={dataTestId ? `${dataTestId}-submit` : undefined}
+            data-testid={resolvedSubmitTestId}
           >
             {form.formState.isSubmitting ? submittingLabel : submitLabel}
           </Button>
